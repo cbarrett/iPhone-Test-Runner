@@ -13,6 +13,14 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
+    /*
+     XXX Current line of thinking brain dump:
+     - Walk the class hierarchy and look for tests that are subclasses of SenTestCase.
+     - Run each test (look at GTM)
+     - Once all the tests are run exit with the right status code.
+     We don't need to do any logging because of SenTestObserver (I think).
+     */
+    
     return;
     
     NSLog(@"Arguments: %@", [[NSProcessInfo processInfo] arguments]);
