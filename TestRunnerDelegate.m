@@ -13,6 +13,8 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
+    return;
+    
     NSLog(@"Arguments: %@", [[NSProcessInfo processInfo] arguments]);
     NSString *testBundlePath = [[[NSProcessInfo processInfo] arguments] lastObject];
     if (testBundlePath) {
