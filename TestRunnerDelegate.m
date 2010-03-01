@@ -8,6 +8,18 @@
 
 #import "TestRunnerDelegate.h"
 #import <SenTestingKit/SenTestingKit.h>
+#import <objc/runtime.h>
+
+Class class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
+{
+    Class c = child;
+    do {
+        if (c == ancestor) {
+            return YES;
+        }
+    } while (c = class_getSuperclass(c));
+    return NO;
+}
 
 @implementation TestRunnerDelegate
 
@@ -15,25 +27,32 @@
 {
     /*
      XXX Current line of thinking brain dump:
-     - Walk the class hierarchy and look for tests that are subclasses of SenTestCase.
+     √ Walk the class hierarchy and look for tests that are subclasses of SenTestCase.
      - Run each test (look at GTM)
      - Once all the tests are run exit with the right status code.
      We don't need to do any logging because of SenTestObserver (I think).
      */
+    Class *classes = NULL;
+    int numClasses = objc_getClassList(NULL, 0);
+    NSParameterAssert(numClasses > 0);
+    classes = malloc(sizeof(Class) * numClasses);
+    objc_getClassList(classes, numClasses);
     
-    return;
-    
-    NSLog(@"Arguments: %@", [[NSProcessInfo processInfo] arguments]);
-    NSString *testBundlePath = [[[NSProcessInfo processInfo] arguments] lastObject];
-    if (testBundlePath) {
-        [[NSUserDefaults standardUserDefaults] setObject:testBundlePath forKey:SenTestedUnitPath];
-        [[NSUserDefaults standardUserDefaults] setObject:SenTestScopeAll forKey:SenTestScopeKey];
+    for (int i = 0; i < numClasses; i++) {
+        Class c = classes[i];
+        if (class_isDescendedFromClass_TestRunner(c, objc_getClass("SenTestCase"))) {
+            NSString *className = NSStringFromClass(c);
+            if ([className isEqualToString:@"SenInterfaceTestCase"]) {
+                continue;
+            }
+            NSLog(@"%@", className);
+        }
     }
     
-    int exitStatus = SenSelfTestMain();
+    free(classes);
     
-    // XXX does this even get called? SenSelfTestMain whyyyy
-    
+    int exitStatus = 0;
+        
     // Cribbed from GTMIPhoneUnitTestDelegate
     if (!getenv("TEST_RUNNER_DISABLE_TERMINATION")) {
         // Alternative to exit(status); so it cleanly terminates the UIApplication
