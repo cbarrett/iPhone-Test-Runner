@@ -37,6 +37,7 @@
 		EF4876D11131BF7D00140088 /* UILabelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabelTest.m; sourceTree = "<group>"; };
 		EF4876D61131C03700140088 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = "<absolute>"; };
 		EF4876EA1131C13300140088 /* TestRunnerMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRunnerMain.m; sourceTree = "<group>"; };
+		EF9098F3113BA94400F2DFDD /* RunUnitTests.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = RunUnitTests.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				EF4876EA1131C13300140088 /* TestRunnerMain.m */,
+				EF9098F3113BA94400F2DFDD /* RunUnitTests.sh */,
 			);
 			name = "Test Runner";
 			sourceTree = "<group>";
@@ -166,10 +168,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EF4876C31131BF0F00140088 /* Build configuration list for PBXNativeTarget "Test Runner" */;
 			buildPhases = (
-				EF4876BA1131BF0E00140088 /* Resources */,
+				EF909910113BAA8900F2DFDD /* Resources */,
 				EF4876BB1131BF0E00140088 /* Sources */,
 				EF4876BC1131BF0E00140088 /* Frameworks */,
-				EFBCB7A1113264AA00AD83C0 /* ShellScript */,
+				EF909909113BA9F500F2DFDD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -207,7 +209,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EF4876BA1131BF0E00140088 /* Resources */ = {
+		EF909910113BAA8900F2DFDD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -217,7 +219,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		EFBCB7A1113264AA00AD83C0 /* ShellScript */ = {
+		EF909909113BA9F500F2DFDD /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -228,7 +230,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# We kill the iPhone simulator because otherwise we run into issues where\n# the unittests fail becuase the simulator is currently running, and \n# at this time the iPhone SDK won't allow two simulators running at the same\n# time.\n/usr/bin/killall \"iPhone Simulator\" 1> /dev/null 2> /dev/null\n\nexport DYLD_ROOT_PATH=\"$SDKROOT\"\nexport DYLD_FRAMEWORK_PATH=\"$CONFIGURATION_BUILD_DIR\"\nexport IPHONE_SIMULATOR_ROOT=\"$SDKROOT\"\nexport CFFIXED_USER_HOME=\"$TEMP_FILES_DIR/iPhone Simulator User Dir\"\n\n# Cleanup user home directory\nif [ -d \"$CFFIXED_USER_HOME\" ]; then\nrm -rf \"$CFFIXED_USER_HOME\"\nfi\nmkdir \"$CFFIXED_USER_HOME\"\nmkdir \"$CFFIXED_USER_HOME/Documents\"\nmkdir -p \"$CFFIXED_USER_HOME/Library/Caches\"\n\nexport TEST_RIG=\"$TARGET_BUILD_DIR/$EXECUTABLE_PATH\"\nexport OTHER_TEST_FLAGS=\"-RegisterForSystemEvents\"\nexport TEST_BUNDLE_PATH=\" \"\n\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+			shellScript = "\"$SRCROOT\"/RunUnitTests.sh";
 		};
 /* End PBXShellScriptBuildPhase section */
 
