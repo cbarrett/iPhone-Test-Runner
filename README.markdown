@@ -19,4 +19,7 @@ The test runner that's distributed with Xcode is a Mac application and isn't set
     - Add the SenTestTool key with a value of YES.
 1. To run all tests at build time, edit your main target and add Test Runner as a direct dependecy.
 
+### Target Template
+For a little automation love, open the Templates folder and copy the Target Templates folder into ~/Library/Application Support/Developer/Shared/Xcode. Now you can use the Test Runner template to create a Test Runner target. You still need to add the TestRunnerMain.m file and make sure that the Run Script phase actually points to the RunUnitTests.sh script.
+
 That's it! From now on, add any tests to the Test Runner target. Patches welcome to automate this process, perhaps with an Applescript?
