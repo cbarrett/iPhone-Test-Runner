@@ -35,13 +35,7 @@ BOOL class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
-    /*
-     XXX Current line of thinking brain dump:
-     √ Walk the class hierarchy and look for tests that are subclasses of SenTestCase.
-     - Run each test (look at GTM)
-     - Once all the tests are run exit with the right status code.
-     We don't need to do any logging because of SenTestObserver (I think).
-     */
+    // This enables the default observer, SenTestLog, to watch all test running notifications and emit the logging statements Xcode's looking for.
     [SenTestObserver resumeObservation];
     SenTestSuite *allTests = [[SenTestSuite alloc] initWithName:@"All Tests"];
     
@@ -55,6 +49,7 @@ BOOL class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
         Class testCaseClass = classes[i];
         if (class_isDescendedFromClass_TestRunner(testCaseClass, objc_getClass("SenTestCase"))) {
             NSString *className = NSStringFromClass(testCaseClass);
+            // This class comes with SenTesting and we don't want to run all zero of its tests.
             if ([className isEqualToString:@"SenInterfaceTestCase"]) {
                 continue;
             }
