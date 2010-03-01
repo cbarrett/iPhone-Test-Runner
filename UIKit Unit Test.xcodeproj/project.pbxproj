@@ -18,7 +18,6 @@
 		EF4877261131C43A00140088 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		EF4877271131C44100140088 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		EF48772B1131C45800140088 /* TestRunnerMain.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4876EA1131C13300140088 /* TestRunnerMain.m */; };
-		EF4877AD1131CCED00140088 /* TestRunnerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4877AC1131CCED00140088 /* TestRunnerDelegate.m */; };
 		EFBCB7BE113265B700AD83C0 /* UILabelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4876D11131BF7D00140088 /* UILabelTest.m */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +37,6 @@
 		EF4876D11131BF7D00140088 /* UILabelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabelTest.m; sourceTree = "<group>"; };
 		EF4876D61131C03700140088 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/Developer/Library/Frameworks/SenTestingKit.framework; sourceTree = "<absolute>"; };
 		EF4876EA1131C13300140088 /* TestRunnerMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRunnerMain.m; sourceTree = "<group>"; };
-		EF4877AB1131CCED00140088 /* TestRunnerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRunnerDelegate.h; sourceTree = "<group>"; };
-		EF4877AC1131CCED00140088 /* TestRunnerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRunnerDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,8 +130,6 @@
 			isa = PBXGroup;
 			children = (
 				EF4876EA1131C13300140088 /* TestRunnerMain.m */,
-				EF4877AB1131CCED00140088 /* TestRunnerDelegate.h */,
-				EF4877AC1131CCED00140088 /* TestRunnerDelegate.m */,
 			);
 			name = "Test Runner";
 			sourceTree = "<group>";
@@ -252,7 +247,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF48772B1131C45800140088 /* TestRunnerMain.m in Sources */,
-				EF4877AD1131CCED00140088 /* TestRunnerDelegate.m in Sources */,
 				EFBCB7BE113265B700AD83C0 /* UILabelTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
