@@ -10,14 +10,14 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <objc/runtime.h>
 
-Class class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
+BOOL class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
 {
     Class c = child;
-    do {
+    while (c = class_getSuperclass(c)) {
         if (c == ancestor) {
             return YES;
         }
-    } while (c = class_getSuperclass(c));
+    }
     return NO;
 }
 
@@ -32,26 +32,32 @@ Class class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
      - Once all the tests are run exit with the right status code.
      We don't need to do any logging because of SenTestObserver (I think).
      */
+    [SenTestObserver resumeObservation];
+    SenTestSuite *allTests = [[SenTestSuite alloc] initWithName:@"All Tests"];
+    
     Class *classes = NULL;
     int numClasses = objc_getClassList(NULL, 0);
     NSParameterAssert(numClasses > 0);
     classes = malloc(sizeof(Class) * numClasses);
     objc_getClassList(classes, numClasses);
-    
+        
     for (int i = 0; i < numClasses; i++) {
-        Class c = classes[i];
-        if (class_isDescendedFromClass_TestRunner(c, objc_getClass("SenTestCase"))) {
-            NSString *className = NSStringFromClass(c);
+        Class testCaseClass = classes[i];
+        if (class_isDescendedFromClass_TestRunner(testCaseClass, objc_getClass("SenTestCase"))) {
+            NSString *className = NSStringFromClass(testCaseClass);
             if ([className isEqualToString:@"SenInterfaceTestCase"]) {
                 continue;
             }
-            NSLog(@"%@", className);
+                        
+            SenTestSuite *suite = [SenTestSuite testSuiteForTestCaseClass:testCaseClass];
+            [allTests addTest:suite];
         }
     }
     
     free(classes);
-    
-    int exitStatus = 0;
+
+    SenTestRun *run = [allTests run];
+    int exitStatus = [run hasSucceeded] ? 0 : 1;
         
     // Cribbed from GTMIPhoneUnitTestDelegate
     if (!getenv("TEST_RUNNER_DISABLE_TERMINATION")) {
