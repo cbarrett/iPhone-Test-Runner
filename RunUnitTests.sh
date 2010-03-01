@@ -4,7 +4,7 @@
 # UIKit Unit Test
 #
 # Created by Colin Barrett on 2/28/10.
-# Copyright 2010 __MyCompanyName__. All rights reserved.
+# Copyright 2010 Springs & Struts. All rights reserved.
 
 # Most of this is cribbed from GTM. Thanks guys!
 

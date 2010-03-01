@@ -3,7 +3,7 @@
 //  UIKit Unit Test
 //
 //  Created by Colin Barrett on 2/21/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Copyright 2010 Springs & Struts. All rights reserved.
 //
 
 #import <SenTestingKit/SenTestingKit.h>
@@ -28,10 +28,7 @@ BOOL class_isDescendedFromClass_TestRunner(Class child, Class ancestor)
     return NO;
 }
 
-@interface TestRunnerDelegate : NSObject <UIApplicationDelegate> {
-    
-}
-
+@interface TestRunnerDelegate : NSObject <UIApplicationDelegate> { }
 @end
 
 @implementation TestRunnerDelegate
