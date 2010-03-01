@@ -93,7 +93,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				EF4876C01131BF0E00140088 /* Test Runner-Info.plist */,
 				EF4876D61131C03700140088 /* SenTestingKit.framework */,
 			);
 			name = CustomTemplate;
@@ -132,6 +131,7 @@
 			children = (
 				EF4876EA1131C13300140088 /* TestRunnerMain.m */,
 				EF9098F3113BA94400F2DFDD /* RunUnitTests.sh */,
+				EF4876C01131BF0E00140088 /* Test Runner-Info.plist */,
 			);
 			name = "Test Runner";
 			sourceTree = "<group>";
